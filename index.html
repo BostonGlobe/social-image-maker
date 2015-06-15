@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SMEAR</title>
+        <link rel='stylesheet' href='css/main.css'/>
+        <link rel='stylesheet' href='css/font.css'/>
+        <link rel='stylesheet' href='css/settings.css'/>
+    </head>
+    <body>
+        <div class='container'>
+            <!-- landing screen with input box -->
+            <div class='intro'>
+                <h1>S.M.E.A.R.</h1>
+                <p>(Social Media Emitting Art Robot)</p>
+                <form class='story-form'>
+                    <input class='story-form--input' placeholder='Enter the URL of a story'>
+                    <button type='submit' class='story-form--button'>Go</button>
+                </form>
+                <div class='thinking hide'>Thinking...</div>
+            </div>
+
+
+            <!-- creation screen -->
+            <div class='story hide'>
+                <div class='smear-ui'>
+                    <div class='smear-ui--options'>
+                        <div class='options--item option--platform'>
+                            <span>Platform</span>
+                            <button data-prop='platform' data-val='twitter' class='selected'>
+                                <img src='http://apps.bostonglobe.com/common/img/twitter.svg'>
+                            </button>
+                            <button data-prop='platform' data-val='facebook'>
+                                <img src='http://apps.bostonglobe.com/common/img/facebook.svg'>
+                            </button>
+                        </div>
+                         <div class='options--item option--color'>
+                            <span>Color</span>
+                            <button data-prop='color' data-val='light-on-dark'>Light on dark</button>
+                            <button data-prop='color' data-val='dark-on-light'>Dark on light</button>
+                        </div>
+                        <div class='options--item option--position'>
+                            <span>Image Position</span>
+                            <button data-prop='position' data-val='up'>&uarr;</button>
+                            <button data-prop='position' data-val='down'>&darr;</button>
+                            <button data-prop='position' data-val='left'>&larr;</button>
+                            <button data-prop='position' data-val='right'>&rarr;</button>
+                        </div>
+                         <div class='options--item option--layout'>
+                            <span>Layout</span>
+                            <button data-prop='layout' data-val='bottom-full' class='selected'>1</button>
+                            <button data-prop='layout' data-val='top-half'>2</button>
+                            <button data-prop='layout' data-val='middle-full'>3</button>
+                            <button data-prop='layout' data-val='bottom-half-left'>4</button>
+                            <button data-prop='layout' data-val='bottom-half-right'>5</button>
+                        </div>
+                        <div class='options--item option--font'>
+                            <span>Font</span>
+                            <button data-prop='font' data-val='"Benton", Helvetica, sans-serif' class='selected'>Benton</button>
+                            <button data-prop='font' data-val='"Miller", Georgia, serif'>Miller</button>
+                        </div>
+                        <div class='options--item option--size'>
+                            <span>Font Size</span>
+                            <button data-prop='size' data-val='1'>+</button>
+                            <button data-prop='size' data-val='-1'>-</button>
+                        </div>
+                        <div class='options--item option--align'>
+                            <span>Text Align</span>
+                            <button data-prop='align' data-val='left' class='selected'>Left</button>
+                            <button data-prop='align' data-val='center'>Center</button>
+                            <button data-prop='align' data-val='right'>Right</button>
+                        </div>
+                        <div class='options--item option--quote'>
+                            <span>Quote text</span>
+                            <input data-prop='quoteText' placeholder='Enter quote here'>
+                        </div>
+                        <div class='options--item option--attriubtion'>
+                            <span>Quote attribution</span>
+                            <input data-prop='quoteAttribution' placeholder='Enter name here'>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- output canvas -->
+                <div class='smear-canvas'>
+                    <div class='canvas--image'></div>
+                    <div class='canvas--watermark'></div>
+                    <div class='canvas--quote bottom-full'>
+                        <p class='quote--text'></p>
+                        <p class='quote--attribution'></p>
+                    </div>
+                </div>
+                <div class='smear-finish'>
+                    <button class='generate'>Generate image</button>
+                </div>
+                <div class='smear-output'></div>
+            </div>
+        </div>
+        <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js'></script>
+        <script src='http://cdn.embed.ly/jquery.embedly-3.1.1.min.js' type='text/javascript'></script>
+        <script type='text/javascript' src='js/libs/html2canvas.js'></script>
+        <script type='text/javascript' src='js/libs/canvas2image.js'></script>
+        <script type='text/javascript' src='js/settings.js'></script>
+        <script type='text/javascript' src='js/main.js'></script>
+    </body>
+</html>
