@@ -1,5 +1,5 @@
 (function() {
-	var $canvas = $('.smear-canvas');
+	var $canvas = $('.sim-canvas');
 	var init = function() {
 		if(SETTINGS.embedlyKey) {
 			setupEvents();	
@@ -10,14 +10,14 @@
 
  	// handle user input
 	var setupEvents = function() {
-		$('.smear-options button').on('click', function() {
+		$('.sim-options button').on('click', function() {
 			var el = $(this);
 			var prop = el.attr('data-prop');
 			var val = el.attr('data-val');
 			adjustOptions[prop]({ el: el, val: val });
 		});
 
-		$('.smear-options input').on('keyup', function() {
+		$('.sim-options input').on('keyup', function() {
 			var el = $(this);
 			var prop = el.attr('data-prop');
 			var val = el.val();
@@ -66,7 +66,7 @@
 
 		//set bg color and text based on dominant colors in image
 		var choice = getBestColor(img.colors);
-		$canvas.removeClass().addClass('smear-canvas ' + choice);
+		$canvas.removeClass().addClass('sim-canvas ' + choice);
 		
 		// $('.option--color').find('button').removeClass('selected');
 		// $('.option--color').find('.' + choice).addClass('selected');
@@ -108,8 +108,8 @@
 			letterRendering: true,
 			allowTaint: true,
 		    onrendered: function(canvas) {
-		    	var html = '<p>Right click and save image. Now go smear it all over the internet.</p>';
-		    	$('.smear-output').empty().append(html).append(canvas);
+		    	var html = '<p>Right click and save image. Now go sim it all over the internet.</p>';
+		    	$('.sim-output').empty().append(html).append(canvas);
 		    }
 		});
 	};
@@ -163,7 +163,7 @@
 		},
 		color: function(params) {
 			toggleSelected(params);
-			$canvas.removeClass().addClass('smear-canvas ' + params.val);
+			$canvas.removeClass().addClass('sim-canvas ' + params.val);
 		},
 		quoteText: function(params) {
 			var val = params.val.trim();

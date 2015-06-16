@@ -1,6 +1,7 @@
-# Smear
+# Social Image Maker
 
 A tool to help generate social images with text using the Embedly API.
 
 ## Setup
-Drop in Embedly API key in main.js
+Fill out `js/settings.js`:
+- Drop in Embedly API key

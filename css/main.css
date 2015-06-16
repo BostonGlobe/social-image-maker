@@ -34,10 +34,6 @@ button {
     margin-bottom: 0;
 }
 
-.intro p {
-    margin-top: 0;
-}
-
 .story-form--input {
 	font-size: 1em;
 	line-height: 1.4;
@@ -52,16 +48,16 @@ button {
 
 
 /* canvas stuff */
-.smear-canvas {
+.sim-canvas {
     position: relative;
     margin: 0 auto;
 }
 
-.smear-canvas.light-on-dark {
+.sim-canvas.light-on-dark {
 	background: #1a1a1a;
 }
 
-.smear-canvas.dark-on-light {
+.sim-canvas.dark-on-light {
 	background: #fff;
 }
 
@@ -163,7 +159,7 @@ button {
     display: inline-block;
 }
 
-.smear-ui {
+.sim-ui {
 	font-size: 0.9em;
     padding: 1em;
     margin: 2em auto;
@@ -196,12 +192,12 @@ button {
     color: #fff;
 }
 
-.smear-finish, .smear-output {
+.sim-finish, .sim-output {
     margin: 2em 0;
     text-align: center;
 }
 
-.smear-output p {
+.sim-output p {
 	/* CUSTOM FONT HERE */
 	font-family: 'Benton', Helvetica;
 	color: #666;
