@@ -10,7 +10,7 @@ A tool to help generate social images with text using the Embedly API.
 - Create custom fonts in `settings.css`
 
 ### Settings
-Settings is where you want to do any other customizations, including:
+`js/settings.js` is where you want to do any other customizations, including:
 - Embedly API key (required)
 - Supported social platforms and target dimensions
 - Custom font options
