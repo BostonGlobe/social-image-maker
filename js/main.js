@@ -118,13 +118,12 @@
 		
 		// set dimensions based on default platform
 		var defaultPlatform = SETTINGS.options['platform'].default;
-		var defaultFont = SETTINGS.options['font'].default;
+		var defaultFont = SETTINGS.options['font'] ? SETTINGS.options['font'].default : null;
 
 		$canvas.css({
 			'width': SETTINGS.options['platform'].choices[defaultPlatform].w,
 			'height': SETTINGS.options['platform'].choices[defaultPlatform].h,
-			'font-family': SETTINGS.options['font'].choices[defaultFont]
-
+			'font-family': defaultFont ? SETTINGS.options['font'].choices[defaultFont] : 'Helvetica, sans-serif'
 		});
 	};
 
