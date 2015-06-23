@@ -3,8 +3,10 @@
 A tool to help generate social images with text using the Embedly API.
 
 ## Setup
+Clone repo: `git clone https://github.com/BostonGlobe/social-image-maker.git`
+
 ### Logo
-- Replace temp logo in `img` folder with your own (save as `logo.png`)
+- Replace temp logo in `img` folder with your own 96x96 png file (save as `img/logo.png`)
 
 ### Fonts
 - Create custom fonts in `settings.css`
