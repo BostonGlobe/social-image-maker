@@ -141,7 +141,7 @@
 			letterRendering: true,
 			allowTaint: true,
 		    onrendered: function(canvas) {
-		    	var html = '<p>Right click and save image. Now go sim it all over the internet.</p>';
+		    	var html = '<p>Right click and save image to download.</p>';
 		    	$('.sim-output').empty().append(html).append(canvas);
 		    }
 		});
