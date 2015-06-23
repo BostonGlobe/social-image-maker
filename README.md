@@ -4,7 +4,7 @@ A tool to help generate social images with text using the Embedly API.
 
 ## Setup
 ### Logo
-- Add your logo in PNG format to the `img` folder
+- Replace temp logo in `img` folder with your own (save as `logo.png`);
 
 ### Fonts
 - Create custom fonts in `settings.css`
