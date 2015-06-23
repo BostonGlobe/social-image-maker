@@ -4,7 +4,7 @@ A tool to help generate social images with text using the Embedly API.
 
 ## Setup
 ### Logo
-- Replace temp logo in `img` folder with your own (save as `logo.png`);
+- Replace temp logo in `img` folder with your own (save as `logo.png`)
 
 ### Fonts
 - Create custom fonts in `settings.css`
@@ -12,7 +12,7 @@ A tool to help generate social images with text using the Embedly API.
 ### Settings
 `js/settings.js` is where you want to do any other customizations, including:
 - Embedly API key (required)
-- Supported social platforms and target dimensions
+- Supported social platforms and target dimensions (required)
 - Custom font options
 - Image helper function to replace parts of source url
 
