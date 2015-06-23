@@ -4,8 +4,8 @@ window.SETTINGS = {
 		'platform': {
 			'default': 'facebook',
 			'choices': {
-				'facebook': { w: '1200', h: '627' },
-				'twitter': { w: '1024', h: '512' },
+				'facebook': { w: 1200, h: 627 },
+				'twitter': { w: 1024, h: 512 },
 				'instagram': {w: 640, h: 640 }
 			}	
 		},
