@@ -19,19 +19,16 @@ button {
 }
 
 .container {
-    max-width: 1280px;
     margin: 0 auto;
     padding: 1em;
+    max-width: 1280px;
+    width: 100%;
 }
 
 
 /* intro stuff */
 .intro {
     text-align: center;
-}
-
-.intro h1 {
-    margin-bottom: 0;
 }
 
 .story-form--input {
@@ -53,14 +50,6 @@ button {
     margin: 0 auto;
 }
 
-.sim-canvas.light-on-dark {
-	background: #1a1a1a;
-}
-
-.sim-canvas.dark-on-light {
-	background: #fff;
-}
-
 .canvas--image {
     position: absolute;
     width: 100%;
@@ -68,78 +57,90 @@ button {
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
-/*    opacity: 0.5;*/
     z-index: 0;
 }
 
 .canvas--watermark {
     position: absolute;
-    width: 64px;
-    height: 64px;
     right: 1em;
     top: 1em;
     opacity: 0.7;
-    background: url('../img/logo.png');
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
+    max-width: 8%;
+}
+
+.canvas--watermark img {
+    width: 100%;
+    display: block;
 }
 
 .canvas--quote {
+    display: inline-block;
     position: absolute;
     padding: 1em;
-    font-size: 24px;
+    font-size: 28px;
     line-height: 1.4;
-    /* CUSTOM FONT HERE */
-    font-family: 'Benton', Helvetica;
 }
 
-.dark-on-light .canvas-quote {
+.canvas--quote p {
+    margin: 0;
+}
+
+.quote--text {
+    font-size: 1em;
+}
+
+.quote--attribution {
+    color: #eee;
+    text-align: right;
+    font-size: 0.8em;
+}
+
+.quote--attribution:empty {
+    display: none;
+}
+
+.quote--attribution:before {
+    content: '\02014';
+    display: inline-block;
+}
+
+
+/* options */
+
+.sim-canvas.light-on-dark {
+    background: #1a1a1a;
+}
+
+.sim-canvas.dark-on-light {
+    background: #fff;
+}
+
+.sim-canvas.top .canvas--quote {
+    top: 0;
+    bottom: auto;
+}
+
+.sim-canvas.middle .canvas--quote {
+    top: 50%;
+    bottom: auto;
+}
+
+.sim-canvas.bottom .canvas--quote {
+    bottom: 0;
+    top: auto;
+}
+
+.sim-canvas.top .canvas--watermark {
+    bottom: 1em;
+    top: auto;
+}
+
+.dark-on-light .canvas--quote {
 	color: #1a1a1a;
 }
 
-.light-on-dark .canvas-quote {
+.light-on-dark .canvas--quote {
 	color: #fff;
-}
-
-.bottom-full {
-    bottom: 0;
-    left: 0;
-    width: 100%;
-}
-
-.top-half {
-    top: 0;
-    left: 0;
-    width: 50%;
-}
-
-.middle-full {
-    top: 40%;
-    left: 0;
-    width: 100%;
-}
-
-.bottom-half-left {
-    bottom: 0;
-    left: 0;
-    width: 50%;
-}
-
-.bottom-half-right {
-    bottom: 0;
-    right: 0;
-    width: 50%;
-}
-
-.quote-text {
-    font-size: 1.2em;
-    display: block;
-}
-
-.quote-attribution {
-    display: block;
-    text-align: right;
 }
 
 .light-on-dark .quote-attribution {
@@ -150,25 +151,47 @@ button {
 	color: #444;
 }
 
-.quote-attribution:empty {
-    display: none;
+.canvas--quote.text-shadow p {
+    text-shadow: 0 0 6px #1a1a1a;
 }
 
-.quote-attribution:before {
-    content: '\02014';
-    display: inline-block;
+.canvas--quote.left {
+    left: 0;
+    right: auto;
+    text-align: left;
 }
 
+.canvas--quote.center {
+    width: 100%;
+    text-align: center;
+}
+
+.canvas--quote.center .quote--attribution {
+    text-align: center;
+}
+
+.canvas--quote.right {
+    right: 0;
+    left: auto;
+    text-align: right;
+}
+
+
+
+/* GUI */
 .sim-ui {
 	font-size: 0.9em;
-    padding: 1em;
     margin: 2em auto;
+    border-bottom: 1px dashed #ccc;
     height: 100%;
     overflow: hidden;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    width: 1050px;
+    width: 100%;
 }
+
+/*.options--set {
+    height: 100%;
+    overflow: hidden;
+}*/
 
 .options--item {
     float: left;
@@ -177,7 +200,6 @@ button {
 }
 
 .options--item span {
-    text-align: center;
     display: block;
 }
 

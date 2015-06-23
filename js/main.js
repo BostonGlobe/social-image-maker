@@ -1,27 +1,69 @@
 (function() {
 	var $canvas = $('.sim-canvas');
+	var $canvasImage = $('.canvas--image');
+	var $canvasQuote = $('.canvas--quote');
+	var $quoteText = $('.quote--text');
+	var $quoteAttribution = $('.quote--attribution');
+	var $story = $('.story');
+	var $thinking = $('.thinking');
+	
+	var _canvasOptions;
+
+	var FONT_SIZE = { max: 56, min: 24 };
+
 	var init = function() {
+		setupOptions();
 		if(SETTINGS.embedlyKey) {
-			setupEvents();	
+			setupEvents();
+			checkDev();
 		} else {
-			alert('You must setup an embedly key and add it to the to main.js');
+	 		alert('You must setup an embedly key and add it to the to main.js');	
+		}
+	};
+
+	var checkDev = function() {
+		if(SETTINGS.embedlyKey === 'dev') {
+			showOptions({images:[{url:'img/placeholder.jpg'}]});
+		}
+	};
+
+	var setupOptions = function() {
+		for(var name in SETTINGS.options) {
+			var option = SETTINGS.options[name];
+			appendChoices(name, option);
+		}
+	};
+
+	var appendChoices = function(name, option) {
+		var select = $('.option--' + name).find('select');
+		for(var choice in option.choices) {
+			var selected = choice === SETTINGS.options[name]['default'] ? ' selected' : '';
+			var html = '<option data-prop="' + name + '" value="' + choice + '" ' + selected + '>' + choice + '</option>';
+			select.append(html);
 		}
 	};
 
  	// handle user input
 	var setupEvents = function() {
-		$('.sim-options button').on('click', function() {
+		$('.options--item button').on('click', function() {
 			var el = $(this);
 			var prop = el.attr('data-prop');
 			var val = el.attr('data-val');
-			adjustOptions[prop]({ el: el, val: val });
+			_canvasOptions[prop]({ el: el, val: val });
 		});
 
-		$('.sim-options input').on('keyup', function() {
+		$('.options--item select').on('change', function() {
 			var el = $(this);
 			var prop = el.attr('data-prop');
 			var val = el.val();
-			adjustOptions[prop]({ el: el, val: val });
+			_canvasOptions[prop]({ el: el, val: val });
+		});
+
+		$('.options--item input').on('keyup', function() {
+			var el = $(this);
+			var prop = el.attr('data-prop');
+			var val = el.val();
+			_canvasOptions[prop]({ el: el, val: val });
 		});
 
 		$('.generate').on('click', createOutput );
@@ -45,8 +87,12 @@
 
 	// reveal options ui
 	var showOptions = function(data) {
-		$('.thinking').addClass('hide');
-		$('.story').removeClass('hide');
+		$thinking.addClass('hide');
+		$story.removeClass('hide');
+
+		// default to light text on dark bg
+		$canvas.addClass('light-on-dark');
+
 		if(data.error) {
 			alert('something is wrong.');
 		} else {
@@ -57,42 +103,29 @@
 
 	// append image and set proper color
 	var createCanvas = function(data) {
-		// get image url
+		// get image src
 		var img = data.images[0];
 
-		var bg = 'url("' + img.url + '")';
-		// set canvas bg
-		$('.canvas--image').css('background-image', bg);
+		var src = img.url;
 
-		//set bg color and text based on dominant colors in image
-		var choice = getBestColor(img.colors);
-		$canvas.removeClass().addClass('sim-canvas ' + choice);
-		
-		// $('.option--color').find('button').removeClass('selected');
-		// $('.option--color').find('.' + choice).addClass('selected');
-		
-		// set dimensions based on default platform
-		$canvas.css({
-			width: SETTINGS.platforms[SETTINGS.defaultPlatform].w,
-			height: SETTINGS.platforms[SETTINGS.defaultPlatform].h
-		});
-	};
-
-	// returns better overlay option (white or black) based on dominant colors
-	var getBestColor = function(colors) {
-		var best = {black: 0, white: 0};
-		var num = Math.min(colors.length, 3);
-
-		for(var i = 0; i < num; i++) {
-			var color = colors[i];
-			if(color.weight > 0.1) {
-				var o = Math.round(((parseInt(color.color[0]) * 299) + (parseInt(color.color[1]) * 587) + (parseInt(color.color[2]) * 114)) /1000);
-				var choice = o > 125 ? 'black' : 'white';
-				best[choice]++;
-			}
+		if(SETTINGS.imageHelper && typeof SETTINGS.imageHelper === 'function') {
+			src = SETTINGS.imageHelper(src);
 		}
 
-		return best['black'] > best['white'] ? 'dark-on-light' : 'light-on-dark';
+		var bg = 'url("' + src + '")';
+		// set canvas bg
+		$('.canvas--image').css('background-image', bg);
+		
+		// set dimensions based on default platform
+		var defaultPlatform = SETTINGS.options['platform'].default;
+		var defaultFont = SETTINGS.options['font'].default;
+
+		$canvas.css({
+			'width': SETTINGS.options['platform'].choices[defaultPlatform].w,
+			'height': SETTINGS.options['platform'].choices[defaultPlatform].h,
+			'font-family': SETTINGS.options['font'].choices[defaultFont]
+
+		});
 	};
 
 	// toggle selected button in options view
@@ -114,35 +147,36 @@
 		});
 	};
 
-	// functionality for each option selected
-	var adjustOptions = {
-		platform: function(params) {
-			toggleSelected(params);
+	// calculate offset based on height of el for true middle
+	var updateLayoutMargin = function() {
+		var margin = 0;
+		var middle = $canvas.hasClass('middle');
+		if(middle) {
+			var h = $canvasQuote.height();
+			margin = -h * 0.5;
+		}
+		$canvasQuote.css('margin-top', margin);
+	};	
 
+	// functionality for each option selected
+	_canvasOptions = {
+		quoteText: function(params) {
+			var val = params.val.trim();
+			$quoteText.text(val);
+			updateLayoutMargin();
+		},
+		quoteAttribution: function(params) {
+			var val = params.val.trim();
+			$quoteAttribution.text(val);
+			updateLayoutMargin();
+		},
+		platform: function(params) {
 			$canvas.css({
-				width: SETTINGS.platforms[params.val].w,
-				height: SETTINGS.platforms[params.val].h
+				width: SETTINGS.options['platform'].choices[params.val].w,
+				height: SETTINGS.options['platform'].choices[params.val].h
 			});
 		},
-		font: function(params) {
-			toggleSelected(params);
-
-			var quote = params.el.parents('.story').find('.canvas-quote');
-			quote.css('font-family', params.val);
-		},
-		size: function(params) {
-			params.val = parseInt(params.val);
-			var quote = params.el.parents('.story').find('.canvas-quote');
-			var size = parseInt(quote.css('font-size')) + params.val;
-			quote.css('font-size', size);
-		},
-		align: function(params) {
-			toggleSelected(params);
-			var quote = params.el.parents('.story').find('.canvas-quote');
-			quote.css('text-align', params.val);	
-		},
 		position: function(params) {
-			var canvas = params.el.parents('.story').find('.canvas-image');
 			var cssProp;
 			var bgPosition;
 			if(params.val === 'up' || params.val === 'down') {
@@ -150,28 +184,35 @@
 			} else {
 				cssProp = 'background-position-x';
 			}
-			bgPosition = parseInt(canvas.css(cssProp));
+			bgPosition = parseInt($canvasImage.css(cssProp));
 			bgPosition += (params.val === 'up' || params.val === 'right') ? 5 : -5;
 			bgPosition = Math.min(Math.max(0, bgPosition), 100);
 			bgPosition += '%';
-			canvas.css(cssProp, bgPosition);
+			$canvasImage.css(cssProp, bgPosition);
 		},
 		layout: function(params) {
-			toggleSelected(params);
-			var quote = params.el.parents('.story').find('.canvas-quote');
-			quote.removeClass().addClass('canvas-quote').addClass(params.val);
+			$canvas.removeClass('top bottom middle').addClass(params.val);
+			updateLayoutMargin();
 		},
-		color: function(params) {
-			toggleSelected(params);
-			$canvas.removeClass().addClass('sim-canvas ' + params.val);
+		align: function(params) {
+			$canvasQuote.removeClass('left center right').addClass(params.val);
 		},
-		quoteText: function(params) {
-			var val = params.val.trim();
-			$('.quote-text').text(val);
+		font: function(params) {
+			var stack = SETTINGS.options['font'].choices[params.val];
+			$canvas.css('font-family', stack);
 		},
-		quoteAttribution: function(params) {
-			var val = params.val.trim();
-			$('.quote-attribution').text(val);
+		size: function(params) {
+			params.val = parseInt(params.val);
+			var size = parseInt($canvasQuote.css('font-size')) + params.val;
+			size = Math.min(FONT_SIZE.max, Math.max(FONT_SIZE.min, size));
+			$canvasQuote.css('font-size', size);
+		},
+		shadow: function(params) {
+			if(params.val === 'on') {
+				$canvasQuote.addClass('text-shadow');
+			} else {
+				$canvasQuote.removeClass('text-shadow');
+			}
 		}
 	};
 
