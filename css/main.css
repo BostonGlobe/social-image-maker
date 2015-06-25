@@ -42,6 +42,10 @@ button {
 	color: #666;
 }
 
+.story {
+    padding-top: 1em;
+}
+
 
 
 /* canvas stuff */
@@ -184,7 +188,7 @@ button {
 /* GUI */
 .sim-ui {
 	font-size: 0.9em;
-    margin: 2em auto;
+    margin-bottom: 2em;
     border-bottom: 1px dashed #ccc;
     height: 100%;
     overflow: hidden;

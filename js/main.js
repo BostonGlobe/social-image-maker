@@ -105,8 +105,11 @@
 			alert('something is wrong.');
 		} else {
 			createCanvas(data);
-			
 		}
+
+		$('html, body').animate({
+			scrollTop: $story.offset().top
+		});
 	};
 
 	// append image and set proper color
