@@ -1,6 +1,6 @@
 # Social Image Maker
 
-Generate sharable images with quotes *in a jiffy*.
+Generate sharable images with quotes *in a jiffy* using the [Embedly API](http://http://embed.ly/).
 
 ## Setup
 Clone repo: `git clone https://github.com/BostonGlobe/social-image-maker.git`
