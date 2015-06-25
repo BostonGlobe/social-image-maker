@@ -1,6 +1,6 @@
 # Social Image Maker
 
-Generate sharable images with quotes that *super fast*.
+Generate sharable images with quotes *in a jiffy*.
 
 ## Setup
 Clone repo: `git clone https://github.com/BostonGlobe/social-image-maker.git`
