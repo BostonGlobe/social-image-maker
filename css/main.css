@@ -89,17 +89,16 @@ button {
     font-size: 1em;
 }
 
-.quote--attribution {
-    color: #eee;
+.quote--credit {
     text-align: right;
     font-size: 0.8em;
 }
 
-.quote--attribution:empty {
+.quote--credit:empty {
     display: none;
 }
 
-.quote--attribution:before {
+.quote--credit:before {
     content: '\02014';
     display: inline-block;
 }
@@ -143,16 +142,20 @@ button {
 	color: #fff;
 }
 
-.light-on-dark .quote-attribution {
-	color: #ccc;
+.light-on-dark .quote--credit {
+	color: #dedede;
 }
 
-.dark-on-light .quote-attribution {
-	color: #444;
+.dark-on-light .quote--credit {
+	color: #434343;
 }
 
-.canvas--quote.text-shadow p {
+.light-on-dark .canvas--quote.text-shadow p {
     text-shadow: 0 0 6px #1a1a1a;
+}
+
+.dark-on-light .canvas--quote.text-shadow p {
+    text-shadow: 0 0 6px #efefef;
 }
 
 .canvas--quote.left {
@@ -166,7 +169,7 @@ button {
     text-align: center;
 }
 
-.canvas--quote.center .quote--attribution {
+.canvas--quote.center .quote--credit {
     text-align: center;
 }
 
@@ -188,15 +191,16 @@ button {
     width: 100%;
 }
 
-/*.options--set {
+.options--set {
     height: 100%;
     overflow: hidden;
-}*/
+    margin-bottom: 0.5em;
+}
 
 .options--item {
     float: left;
-    margin-right: 2em;
-    margin-bottom: 0.5em;
+    padding-right: 2em;
+    padding-bottom: 0.5em;
 }
 
 .options--item span {
@@ -207,6 +211,14 @@ button {
 	font-size: 0.9em;
 	line-height: 1.4;
 	padding: 0 0.25em;
+    width: 100%;
+}
+
+.options--item.option--text {
+    width: 70%;
+}
+.options--item.option--credit {
+    width: 30%;
 }
 
 .selected, .selected:hover {

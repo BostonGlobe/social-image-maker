@@ -22,13 +22,13 @@
                 <div class='sim-ui'>
                     <div class='sim-ui--options'>
                         <div class='options--set'>
-                            <div class='options--item option--quote'>
-                                <span>Quote text</span>
-                                <input data-prop='quoteText' placeholder='Enter quote here'>
+                            <div class='options--item option--text'>
+                                <span>Text</span>
+                                <input class='input-text' data-prop='text' placeholder='Enter quote/text here'>
                             </div>
-                            <div class='options--item option--attriubtion'>
-                                <span>Quote attribution</span>
-                                <input data-prop='quoteAttribution' placeholder='Enter name here'>
+                            <div class='options--item option--credit'>
+                                <span>Credit</span>
+                                <input class='input-text' data-prop='credit' placeholder='Enter name here'>
                             </div>
                         </div>
                         <div class='options--set'>
@@ -75,6 +75,10 @@
                                     <option value='on'>on</option>
                                 </select>
                             </div>
+                            <div class='options--item option--contrast'>
+                                <span>Contrast</span>
+                                <input class='input-range' type='range' data-prop='contrast' min='0' max='10' step='1' value='5'/>
+                            </div>
                         </div>                        
                     </div>
                 </div>
@@ -87,7 +91,7 @@
                     </div>
                     <div class='canvas--quote'>
                         <p class='quote--text'></p>
-                        <p class='quote--attribution'></p>
+                        <p class='quote--credit'></p>
                     </div>
                 </div>
                 <div class='sim-finish'>

@@ -3,13 +3,14 @@
 	var $canvasImage = $('.canvas--image');
 	var $canvasQuote = $('.canvas--quote');
 	var $quoteText = $('.quote--text');
-	var $quoteAttribution = $('.quote--attribution');
+	var $quoteCredit = $('.quote--credit');
 	var $story = $('.story');
 	var $thinking = $('.thinking');
 	
 	var _canvasOptions;
 
 	var FONT_SIZE = { max: 56, min: 24 };
+	var RANGE_MIDDLE = 5;
 
 	var init = function() {
 		setupOptions();
@@ -59,10 +60,17 @@
 			_canvasOptions[prop]({ el: el, val: val });
 		});
 
-		$('.options--item input').on('keyup', function() {
+		$('.options--item .input-text').on('keyup', function() {
 			var el = $(this);
 			var prop = el.attr('data-prop');
 			var val = el.val();
+			_canvasOptions[prop]({ el: el, val: val });
+		});
+
+		$('.options--item .input-range').on('input', function() {
+			var el = $(this);
+			var prop = el.attr('data-prop');
+			var val = +el.val();
 			_canvasOptions[prop]({ el: el, val: val });
 		});
 
@@ -159,14 +167,14 @@
 
 	// functionality for each option selected
 	_canvasOptions = {
-		quoteText: function(params) {
+		text: function(params) {
 			var val = params.val.trim();
 			$quoteText.text(val);
 			updateLayoutMargin();
 		},
-		quoteAttribution: function(params) {
+		credit: function(params) {
 			var val = params.val.trim();
-			$quoteAttribution.text(val);
+			$quoteCredit.text(val);
 			updateLayoutMargin();
 		},
 		platform: function(params) {
@@ -212,6 +220,14 @@
 			} else {
 				$canvasQuote.removeClass('text-shadow');
 			}
+		},
+		contrast: function(params) {
+			var offset = Math.abs(params.val - RANGE_MIDDLE);
+			var className = params.val - RANGE_MIDDLE > 0 ? 'dark-on-light': 'light-on-dark';
+			var opacity = 1 - offset * 0.1;
+
+			$canvas.removeClass('light-on-dark dark-on-light').addClass(className);
+			$canvasImage.css('opacity', opacity);
 		}
 	};
 
