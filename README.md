@@ -2,6 +2,8 @@
 
 Generate sharable images with quotes *in a jiffy*.
 
+![Jiffy](http://media3.giphy.com/media/ZVm2KF2oMhTUs/giphy.gif)
+
 ## Setup
 Clone repo: `git clone https://github.com/BostonGlobe/social-image-maker.git`
 
