@@ -102,7 +102,7 @@
 		$canvas.addClass('light-on-dark');
 
 		if(data.error) {
-			alert('something is wrong.');
+			alert('Embedly could not find anything for that url.');
 		} else {
 			createCanvas(data);
 		}
@@ -115,27 +115,30 @@
 	// append image and set proper color
 	var createCanvas = function(data) {
 		// get image src
-		var img = data.images[0];
+		if(data.images.length) {
+			var img = data.images[0];
+			var src = img.url;
 
-		var src = img.url;
+			if(SETTINGS.imageHelper && typeof SETTINGS.imageHelper === 'function') {
+				src = SETTINGS.imageHelper(src);
+			}
 
-		if(SETTINGS.imageHelper && typeof SETTINGS.imageHelper === 'function') {
-			src = SETTINGS.imageHelper(src);
+			var bg = 'url("' + src + '")';
+			// set canvas bg
+			$('.canvas--image').css('background-image', bg);
+			
+			// set dimensions based on default platform
+			var defaultPlatform = SETTINGS.options['platform'].default;
+			var defaultFont = SETTINGS.options['font'] ? SETTINGS.options['font'].default : null;
+
+			$canvas.css({
+				'width': SETTINGS.options['platform'].choices[defaultPlatform].w,
+				'height': SETTINGS.options['platform'].choices[defaultPlatform].h,
+				'font-family': defaultFont ? SETTINGS.options['font'].choices[defaultFont] : 'Helvetica, sans-serif'
+			});
+		} else {
+			alert('Embedly does not have any images associated with this story. Try a direct link to the image file.');
 		}
-
-		var bg = 'url("' + src + '")';
-		// set canvas bg
-		$('.canvas--image').css('background-image', bg);
-		
-		// set dimensions based on default platform
-		var defaultPlatform = SETTINGS.options['platform'].default;
-		var defaultFont = SETTINGS.options['font'] ? SETTINGS.options['font'].default : null;
-
-		$canvas.css({
-			'width': SETTINGS.options['platform'].choices[defaultPlatform].w,
-			'height': SETTINGS.options['platform'].choices[defaultPlatform].h,
-			'font-family': defaultFont ? SETTINGS.options['font'].choices[defaultFont] : 'Helvetica, sans-serif'
-		});
 	};
 
 	// toggle selected button in options view
