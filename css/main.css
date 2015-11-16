@@ -46,8 +46,6 @@ img, canvas{
 .sim-canvas {
     position: relative;
     margin: 0 auto;
-    transform: scale(0.5) translateX(-50%) translateY(-50%);
-    -webkit-transform: scale(0.5) translateX(-50%) translateY(-50%);
 }
 
 .canvas--image {
@@ -121,7 +119,7 @@ img, canvas{
 
 .sim-canvas.middle .canvas--quote {
     top: 50%;
-
+    transform: translateY(-50%;)
 }
 
 .sim-canvas.bottom .canvas--quote {
@@ -195,7 +193,7 @@ img, canvas{
 .options--item span {
     display: block;
 }
-.options--item input, .options--item select {
+.options--item input, .options--item select, .story-form input, .story-form select {
 	padding: 5px;
     width: 100%;
 }
