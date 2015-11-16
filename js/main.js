@@ -9,7 +9,7 @@
 	
 	var _canvasOptions;
 
-	var FONT_SIZE = { max: 56, min: 24 };
+	var FONT_SIZE = { max: 256, min: 96 };
 	var RANGE_MIDDLE = 5;
 
 	var init = function() {

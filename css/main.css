@@ -1,13 +1,12 @@
-* {
-	box-sizing: border-box;
-	moz-box-sizing: border-box;
+body{
+    font-size: 16px;
+    font-weight: 300;
+    padding: 0;
+    background-color: #f0f0f0;
 }
-
-body {
-	font-family: Helvetica, Arial, sans-serif;
-	line-height: 1.4;
+h1{
+    margin: 0;
 }
-
 button {
 	font-size: 1em;
 	line-height: 1.4;
@@ -24,12 +23,12 @@ button {
     max-width: 1280px;
     width: 100%;
 }
+img, canvas{
+    max-width: 100%;
+}
 
 
 /* intro stuff */
-.intro {
-    text-align: center;
-}
 
 .story-form--input {
 	font-size: 1em;
@@ -41,11 +40,6 @@ button {
 	margin: 1em 0;
 	color: #666;
 }
-
-.story {
-    padding-top: 1em;
-}
-
 
 
 /* canvas stuff */
@@ -125,7 +119,7 @@ button {
 
 .sim-canvas.middle .canvas--quote {
     top: 50%;
-    bottom: auto;
+    transform: translateY(-50%;)
 }
 
 .sim-canvas.bottom .canvas--quote {
@@ -186,58 +180,53 @@ button {
 
 
 /* GUI */
-.sim-ui {
-	font-size: 0.9em;
-    margin-bottom: 2em;
-    border-bottom: 1px dashed #ccc;
-    height: 100%;
-    overflow: hidden;
-    width: 100%;
-}
-
 .options--set {
     height: 100%;
     overflow: hidden;
     margin-bottom: 0.5em;
 }
-
 .options--item {
     float: left;
     padding-right: 2em;
     padding-bottom: 0.5em;
 }
-
 .options--item span {
     display: block;
 }
-
-.options--item input {
-	font-size: 0.9em;
-	line-height: 1.4;
-	padding: 0 0.25em;
+.options--item input, .options--item select, .story-form input, .story-form select {
+	padding: 5px;
     width: 100%;
 }
-
+.options--item label{
+    display: block;
+}
 .options--item.option--text {
     width: 70%;
 }
 .options--item.option--credit {
     width: 30%;
 }
-
 .selected, .selected:hover {
     background-color: #666;
     color: #fff;
 }
-
-.sim-finish, .sim-output {
-    margin: 2em 0;
-    text-align: center;
-}
-
 .sim-output p {
 	/* CUSTOM FONT HERE */
 	font-family: 'Benton', Helvetica;
 	color: #666;
 	margin-bottom: 1em;
+}
+.preview{
+    background-color: #333;
+    padding: 15px 0
+}
+.panel{
+    border-radius: 0;
+    box-shadow: 0 10px 35px rgba(0,0,0,0.2);
+}
+.well{
+    padding: 15px;
+}
+.button, button, .btn{
+    border-radius: 0;
 }
